@@ -107,6 +107,7 @@ def branch_and_bound(estado_inicial: Estado):
 
 # Ejecución del modelo
 
+
 if __name__ == "__main__":
     print("Configuración inicial del semestre")
     semanas = int(input("Introduce el número de semanas restantes (ej. 3): "))
