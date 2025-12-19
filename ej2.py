@@ -1,16 +1,8 @@
-"""
-Branch and Bound aplicado a la vida universitaria
-Modela la toma de decisiones de un estudiante en las últimas 3 semanas
-priorizando aprobar EDA II y minimizando el número de suspensos.
-"""
-
 from dataclasses import dataclass, field
 from typing import List
 import math
 
-# -----------------------------
 # Definición del estado
-# -----------------------------
 
 @dataclass
 class Estado:
@@ -26,16 +18,10 @@ class Estado:
         return [self.eda, self.ecuaciones, self.calculo, self.geometria]
 
 
-# -----------------------------
 # Cálculo de la cota inferior
-# -----------------------------
 
 def cota_inferior(estado: Estado) -> int:
-    """
-    Cota inferior = suspensos inevitables actuales
-    + asignaturas ya suspensas
-    Si EDA II está suspensa, la cota es infinita (solución inválida)
-    """
+   
     if estado.eda == "Suspensa":
         return math.inf
 
@@ -46,18 +32,10 @@ def cota_inferior(estado: Estado) -> int:
 
     return suspensos
 
-
-# -----------------------------
 # Generación de decisiones
-# -----------------------------
 
 def expandir_estado(estado: Estado) -> List[Estado]:
-    """
-    Genera los posibles estados hijos según las decisiones de la semana:
-    D1: Priorizar EDA II
-    D2: Priorizar asignaturas secundarias
-    D3: Repartir esfuerzo (más estrés)
-    """
+  
     hijos = []
 
     if estado.semanas_restantes == 0:
@@ -98,10 +76,7 @@ def expandir_estado(estado: Estado) -> List[Estado]:
 
     return hijos
 
-
-# -----------------------------
 # Algoritmo Branch and Bound
-# -----------------------------
 
 def branch_and_bound(estado_inicial: Estado):
     mejor_solucion = None
@@ -130,9 +105,7 @@ def branch_and_bound(estado_inicial: Estado):
     return mejor_solucion, mejor_cota
 
 
-# -----------------------------
 # Ejecución del modelo
-# -----------------------------
 
 if __name__ == "__main__":
     print("Configuración inicial del semestre")
